@@ -22,4 +22,8 @@ public class TrueCallerService {
 		}
 		return user;
 	}
+	public User saveUser(User user) {
+		return this.trueCallerRepository.save(user);
+		
+	}
 }
