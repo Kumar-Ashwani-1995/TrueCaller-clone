@@ -1,1 +1,17 @@
-<p>search works!</p>
+<body style="background-image: url('assets/9.jpg');height: 100vh;width: 98vw;">
+
+
+<div class="two-col container py-5">
+    <div class="col1 col-sm-10">
+        <input type="text" placeholder="Phone Number" class="form-control" name="phoneNumber" [(ngModel)]="phoneNumber">
+
+    </div>
+
+ 
+<div class="col2 col-sm-2">
+<button type="button" class="form-control btn btn-info" (click)="getUserDetail()">search</button>
+</div>
+</div>
+
+{{user.name}}
+</body>

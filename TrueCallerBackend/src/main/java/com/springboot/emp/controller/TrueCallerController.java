@@ -1,6 +1,10 @@
 package com.springboot.emp.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,17 +21,15 @@ public class TrueCallerController {
 	@Autowired
 	TrueCallerService trueCallerService;
 	
+	@CrossOrigin
 	@GetMapping("/search/{phoneNo}")
-	public User SearchPhoneNumber(@PathVariable("phoneNo") long phoneNo) {
+	public ResponseEntity<User> SearchPhoneNumber(@PathVariable("phoneNo") long phoneNo) {
 		User user = this.trueCallerService.getPhoneNoOfUser(phoneNo);
-		if (user!=null) {
-		//return user.getName()+ "--------> spam reported "+ user.getSpamCount() ;
-			return user;
-		}
-		//return phoneNo +"not found";
-		return user;
+		
+		return ResponseEntity.of(Optional.of(user));
 	}
 	
+	@CrossOrigin
 	@PutMapping("/spam")
 	public String MarkSpam(@RequestBody User usr) {
 		User user1=this.trueCallerService.getPhoneNoOfUser(usr.getPhoneNumber());
@@ -36,6 +38,7 @@ public class TrueCallerController {
 		return usr.getName()+" is now added as spam";
 	}
 	
+	@CrossOrigin
 	@PostMapping("/addContact")
 	public String importContact(@RequestBody User usr) {
 		if (this.trueCallerService.getPhoneNoOfUser(usr.getPhoneNumber()) == null) {
